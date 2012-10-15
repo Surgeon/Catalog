@@ -1,1 +1,8 @@
 <h1> Main page </h1>
+<ul>
+<% @regions.each do |region| %>
+    <li>
+    <%= link_to(region.name, region_path(region.friendly_url)) %>
+    </li>
+<% end %>
+</ul>
