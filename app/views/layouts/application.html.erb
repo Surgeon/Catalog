@@ -6,9 +6,51 @@
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
-<body>
+<body style="margin-top:60px;" onload="DG.apitracker.regBC('http://stat.api.2gis.ru/?v=1.3&hash=a6ffd3544cc0dfe277c3');">
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="container">
+      <ul class="nav">
+        <li><a href="<%= root_url %>">Каталог предприятий</a></li>
+        <li><a href="<%= root_url + 'news/' %>">Новости</a></li>
 
-<%= yield %>
+        <li><a href="<%= root_url + 'about/about' %>">О проекте</a></li>
+        <li><a href="<%= root_url + 'contacts' %>">Контакты</a></li>
+        <!--<li><a href="<%= root_url + 'company/add_company/' %>">Добавить компанию</a></li>-->
+      </ul>
+      <div id="serach" class="span">
 
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div id="serach-block" class="row">
+    <div id="header" class="row">
+      <div class="span-one-third">
+        <a id="logo" href="<%= root_url %>"></a>
+      </div>
+      <div id="info" class="span-two-thirds">
+
+        <h4><%= get_info_head_text(@head_text) %></h4>
+        <p><%= get_info_text(@text) %></p>
+      </div>
+    </div>
+  </div>
+
+  <%= yield %>
+</div>
+<footer class="footer row">
+  <p class="span offset5">&copy; <%= link_to 'Автоматизация бизнеса в России', root_url %> - новости и каталог компаний по автоматизации | exoda.ru © 2012 <a href="mailto:info@mebelincity.ru">info@exoda.ru</a> </p>
+  <p>&nbsp;</p>
+
+  <p style="margin-left: 650px">
+
+    <!--LiveInternet counter-->
+
+
+  </p>
+</footer>
 </body>
 </html>
+

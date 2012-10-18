@@ -1,6 +1,11 @@
 Catalog::Application.routes.draw do
 
   root :to => 'regions#index'
+
+  devise_for :users
+  mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
+
+
   resources :regions, :only => [:index, :show], :key => :friendly_url
 
   # The priority is based upon order of creation:

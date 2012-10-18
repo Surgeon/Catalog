@@ -1,8 +1,37 @@
-<h1> Main page </h1>
-<ul>
-<% @regions.each do |region| %>
-    <li>
-    <%= link_to(region.name, region_path(region.friendly_url)) %>
-    </li>
-<% end %>
-</ul>
+<div id="news-block" class="row">
+  <div class="span-two-thirds">
+    Heare's the news!
+  </div>
+  <div class="span-one-third">
+    <div class="my_some_adv">
+      <label>немножечко рекламы</label>
+      <img src="img/banner.jpg">
+    </div>
+
+    <div id="my_sidebar-news">
+      <h5>Новое в мире автоматизации</h5>
+      <!-- news -->
+
+
+    </div>
+
+  </div>
+</div>
+
+<div class="page-header">
+  <h2>Каталог компаний по автоматизации</h2>
+</div>
+<div id="catalog" class="row">
+
+
+  <div class="regions span16">
+    <ul>
+      <% @regions.each do |region| %>
+          <li class="region">
+            <%= link_to(region.name, region_path(region.friendly_url),  {:class => 'large'} ) %>
+
+          </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
