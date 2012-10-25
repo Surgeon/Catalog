@@ -40,7 +40,7 @@ class Region < ActiveRecord::Base
     doc = REXML::Document.new(result)
     rubrics = []
     doc.elements.each('root/result/rubric') do |rubric|
-      rubrics << rubric.elements['name'].text
+      rubrics << {:name => rubric.elements['name'].text, :alias => rubric.elements['alias'].text}
     end
     rubrics
   end
@@ -49,13 +49,18 @@ class Region < ActiveRecord::Base
     #--get companies from 2gis API
     require 'net/http'
     require 'rexml/document'
-    query = 'http://catalog.api.2gis.ru/searchinrubric?what=' + rubric + '&where=' + self.name + '&page=' + page.to_s + '&pagesize=30&sort=relevance&version=1.3&key=rulbff8841&output=xml'
+    query = 'http://catalog.api.2gis.ru/searchinrubric?what=' + rubric[:name] + '&where=' + self.name + '&page=' + page.to_s + '&pagesize=30&sort=relevance&version=1.3&key=rulbff8841&output=xml'
     result = Net::HTTP.get(URI.parse(URI.encode(query)))
     doc = REXML::Document.new(result)
     companies = []
     doc.elements.each('root/result/filial') do |company|
-      companies << {:name => company.elements['name'].text, :id => company.elements['name'].text}
+      companies << {:name => company.elements['name'].text, :id => company.elements['id'].text}
     end
     companies
+  end
+
+  def self.get_rubric_name_from_url(rubrics, friendly_url)
+    name = rubrics.detect {|r| r[:alias] == friendly_url}
+    name ? name : rubrics[0]
   end
 end

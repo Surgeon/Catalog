@@ -1,7 +1,52 @@
-<ul>
-  <% @rubrics.each do |rubric| %>
-    <li>
-      <%= rubric %>
-    </li>
-  <% end %>
+<ul class="breadcrumb">
+  <li><%= link_to 'Главная', root_url %><span class="divider">/</span></li>
 </ul>
+<div class="page-header">
+    <h1><%= @rubric[:name] %> в <%= YandexInflect.inflections(@region.name)[5]['__content__'] %></h1>
+</div>
+<div id="catalog" class="row">
+    <div class="span16">
+        <h4>Категории</h4>
+        <div id="first-glance" class="well" style="padding-bottom:14px;">
+            <% @rubrics.each do |rubric| %>
+                <%=  get_rubric_link(@region, rubric, @rubric, 'btn small', 'btn small primary') %>
+            <% end %>
+        </div>
+    </div>
+    <% if @companies.length > 0 %>
+        <div class="companies span12">
+            <ul>
+                <% @companies.each do |company| %>
+                    <li class="company">
+                        <div class="row"></div>
+                        <div class="tags">
+                            <h5><%= link_to(company[:name], company_path(company[:id]), {:class => 'header'} ) %></h5>
+                        </div>
+                        <div class="info">
+                            <p class="address"></p>
+                            <p class="phone"></p>
+                        </div>
+                    </li>
+                <% end %>
+            </ul>
+
+            <div class="pagination">
+                <ul>
+                    <li class="prev"></li>
+                        <li></li>
+                    <li class="next"></li>
+                </ul>
+            </div>
+        </div>
+    <% else %>
+        <div class="alert-message block-message warning">
+            <p>В этом городе у нас пока нет компаний. Вы можете добавить известную вам компанию.</p>
+            <div class="alert-actions">
+                <a href="/company/add_company" class="btn info">Добавить компанию</a>
+            </div>
+        </div>
+    <% end %>
+</div>
+
+
+

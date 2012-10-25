@@ -9,6 +9,7 @@ gem 'mysql2'
 gem 'therubyracer'
 gem 'rails_admin'
 gem 'devise'
+gem "yandex_inflect", "~> 0.1.2"
 
 # Gems used only for assets and not required
 # in production environments by default.

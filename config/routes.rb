@@ -6,7 +6,11 @@ Catalog::Application.routes.draw do
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
 
 
-  resources :regions, :only => [:index, :show], :key => :friendly_url
+  resources :regions, :only => [:index, :show], :key => :friendly_url  do
+    get 'category/:category_name' => 'regions#show', :as => :category
+  end
+
+  resources :company, :only => [:show]
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
