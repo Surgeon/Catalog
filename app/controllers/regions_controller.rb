@@ -2,6 +2,7 @@ class RegionsController < ApplicationController
   #rulbff8841
   def index
     @regions = Region.all
+    @news = NewsItem.limit(5)
   end
 
   def show

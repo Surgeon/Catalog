@@ -1,0 +1,121 @@
+<ul class="breadcrumb">
+  <li><a href="<%= root_url %>">Главная</a><span class="divider">/</span></li>
+  <li><%= @company[:name] %></li>
+</ul>
+<div class="row">
+  <div class="company span12">
+    <div id="profile" class="row">
+      <div class="page-header">
+        <h2><%= @company[:name] ? @company[:name] : 'Без названия' %></h2>
+      </div>
+      <div id="company-info" class="span8">
+
+        <% if @company[:address] %>
+            <p><span class="bold">Адрес: </span><%= @company[:address] %></p>
+        <% end %>
+
+        <% if @company[:contacts]['phone'] %>
+            <p><span class="bold">Телефон: </span>
+              <%= @company[:contacts]['phone'] %>
+            </p>
+        <% end %>
+        <% if @company[:contacts]['website'] %>
+            <p><span class="bold">Сайт: </span><%= @company[:contacts]['website'] %></p>
+        <% end %>
+        <% if @company[:contacts]['fax'] %>
+            <p><span class="bold">Факс: </span>
+                  <%= @company[:contacts]['fax'] %>
+            </p>
+        <% end %>
+        <div class="tags">
+          <span class="bold">Вид деятельности: </span>
+          <% @company[:rubrics].each do |category| %>
+              <span class="tag"><%= category %></span>
+          <% end %>
+        </div>
+        <% if @company[:description] %>
+            <p class="description"><%= @company.description.html_safe %></p>
+        <% end %>
+
+
+
+
+      </div>
+      <div class="span4">
+        <% if @company[:email] %>
+            <a href="<%= root_url + 'company/' + @company.city.friendly_url + '/' + @company.id.to_s + '/contact' %>" id="contact-btn" class="btn success span">Связаться с компанией</a>
+        <% end %>
+        <div class="my_social_buts">
+
+
+        </div>
+      </div>
+
+
+
+
+
+      <div id="services">
+        <div class="map span8">
+          <h4><%= @company[:name] %> на карте</h4>
+          <div class="onmap_l">
+
+            <script src="http://api-maps.yandex.ru/1.1/index.xml?key=AOBw_U4BAAAApWC1RQIAfkvRBiIiO0bX5Jmu_ail1Ib4yKcAAAAAAAAAAAD6dDWIpZynn0bmd-fgHghotQkksA=="
+                    type="text/javascript"></script>
+            <script type="text/javascript">
+                var latitude=parseFloat('<%= @company[:longitude] %>');
+                var longitude=parseFloat('<%= @company[:latitude] %>');
+                var maptitle="<%= @company[:name] %>";
+                var geocoding='<%= @company[:address] %>';
+
+                YMaps.jQuery(function () {
+                    var map = new YMaps.Map(YMaps.jQuery("#YMapsID"));
+                    map.addControl(new YMaps.Zoom());
+                    if ((latitude>0)&&(longitude>0))
+                    {
+                        geopoint=new YMaps.GeoPoint(latitude,longitude);
+                        map.setCenter(geopoint, 14);
+                        map.openBalloon(geopoint, maptitle, {maxWidth:210, mapAutoPan:true});
+                    }
+                    else
+                    {
+                        var geocoder = new YMaps.Geocoder(geocoding);
+                        // По завершению геокодирования инициализируем карту первым результатом
+                        YMaps.Events.observe(geocoder, geocoder.Events.Load, function (geocoder) {
+                            if (geocoder.length()) {
+                                map.setBounds(geocoder.get(0).getBounds());
+                                map.openBalloon(geocoder.get(0).getGeoPoint(), maptitle, {maxWidth:210, mapAutoPan:true});
+                                map.setZoom(14);
+                            }
+                        });
+                    }
+                })
+            </script>
+
+            <div id="YMapsID" style="width:480px;height:300px"></div>
+
+          </div>
+        </div>
+        <p>
+          Сайт medik-uslugi.ru представляет медицинскую отрасль России в интернете, основной раздел сайта, каталог медицинских учреждений.
+          Компания <%= @company[:name] %> в <%= YandexInflect.inflections(@company[:city_name])[5]['__content__'] %> предлагает медицинские услуги. Основное направление деятельности:
+          <% @company[:rubrics].each do |category| %>
+              <span class="tag"><%= category %></span>
+              <% if @company[:rubrics].last != category %>
+                  ,&nbsp;
+              <% end %>
+          <% end %>
+        </p>
+      </div>
+      <!-- Put this div tag to the place, where the Comments block will be -->
+      <div id="vk_comments"></div>
+      <script type="text/javascript">
+          VK.Widgets.Comments("vk_comments", {limit: 10, width: "496", attach: "*"});
+      </script>
+
+    </div>
+
+  </div>
+
+</div>
+</div>

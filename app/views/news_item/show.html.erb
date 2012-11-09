@@ -1,0 +1,54 @@
+<ul class="breadcrumb">
+  <li><%= link_to 'Главная', root_url %><span class="divider">/</span></li>
+  <li><%= @news.title %></li>
+</ul>
+<div class="container">
+  <div class="row">
+    <div class="span-one-third">
+      <div id="news-right-block">
+        <!--
+                          <div id="news-menu">
+                              <dl>
+                                  <dt>Разделы:</dt>
+                                  <dt><a href="#">Все новости</a></dt>
+                                  <dt><a href="#">Новости мебели</a></dt>
+                                  <dt><a href="#">События кухонь</a></dt>
+                                  <dt><a href="#">Пресс релизы</a></dt>
+                              </dl>
+                          </div>
+                      -->
+        <div class="last-news">
+          <dl>
+            <dt>Смотрите также:</dt>
+                <dt>last news item</dt>
+          </dl>
+        </div>
+        <img src="http://placehold.it/220x290/DEF/0069D6&text=AdSense+Block" alt="">
+      </div>
+
+
+    </div>
+    <div class="span-two-thirds">
+      <div class="news main">
+
+        <div class="page-header">
+          <h1><%= @news.title %></h1>
+        </div>
+
+        <div class="news-content">
+
+          <p><em><%= @news.updated_at.strftime("%d.%m.%Y") %></em></p>
+          <p><%= @news.body.html_safe %></p>
+        </div>
+      </div>
+      <!--
+                     <div class="tags">Рубрики:
+                             <span class="tag"><a href="#">Производство мазей</a></span>,
+                             <span class="tag"><a href="#">Отгрузка скрепок</a></span>,
+                             <span class="tag"><a href="#">Монтаж габаритов</a></span>
+                         </div>
+                     -->
+    </div>
+
+  </div>
+</div>

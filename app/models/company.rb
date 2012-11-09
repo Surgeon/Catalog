@@ -13,7 +13,10 @@ class Company < ActiveRecord::Base
       company[:id] = profile.elements['id'] ? profile.elements['id'].text : nil
       company[:name] = profile.elements['name'] ? profile.elements['name'].text : nil
       company[:address] = profile.elements['address'] ? profile.elements['address'].text : nil
+      company[:city_name] = profile.elements['city_name'] ? profile.elements['city_name'].text : nil
       company[:additional_info] = profile.elements['additional_info'] ? {} : nil
+      company[:longitude] = profile.elements['lon'] ? profile.elements['lon'] : nil
+      company[:latitude] = profile.elements['lat'] ? profile.elements['lat'] : nil
       if company[:additional_info]
         doc.elements.each('root/profile/additional_info/attr') do |add|
           company[:additional_info][add.attributes['name']] = add.text

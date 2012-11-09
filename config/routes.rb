@@ -11,6 +11,7 @@ Catalog::Application.routes.draw do
   end
 
   resources :company, :only => [:show]
+  resources :news_item, :only => [:index, :show]
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
