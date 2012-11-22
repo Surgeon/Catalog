@@ -56,11 +56,35 @@ class Region < ActiveRecord::Base
     doc.elements.each('root/result/filial') do |company|
       companies << {:name => company.elements['name'].text, :id => company.elements['id'].text}
     end
-    companies
+    {:companies => companies, :total => doc.elements['root/result'].attributes['total']}
   end
 
   def self.get_rubric_name_from_url(rubrics, friendly_url)
     name = rubrics.detect {|r| r[:alias] == friendly_url}
     name ? name : rubrics[0]
   end
+
+  def add_cross_links_to_region()
+    if !self.randomized
+      a = Region.select(:id).to_a
+      rnd = ''
+      3.times do
+        rnd += a.delete(a.sample).id.to_s + ','
+      end
+      rnd = rnd[0..rnd.size - 2]
+      self.rand_city = rnd
+
+      a = Phrase.select(:id).to_a
+      rnd = ''
+      3.times do
+        rnd += a.delete(a.sample).id.to_s + ','
+      end
+      rnd = rnd[0..rnd.size - 2]
+      self.rand_phrase = rnd
+
+      self.randomized = true
+      self.save
+    end
+  end
+
 end

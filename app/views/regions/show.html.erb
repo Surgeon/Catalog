@@ -30,11 +30,9 @@
                 <% end %>
             </ul>
 
-            <div class="pagination">
+            <div class="pagination pagination-mini">
                 <ul>
-                    <li class="prev"></li>
-                        <li></li>
-                    <li class="next"></li>
+                    <%= get_pagination(@total,30,@page,@region,@rubric).html_safe %>
                 </ul>
             </div>
         </div>

@@ -1,2 +1,37 @@
-<h1>NewsItem#index</h1>
-<p>Find me in app/views/news_item/index.html.erb</p>
+<div id="news-block" class="row">
+  <div class="span-two-thirds">
+    <div id="my_recent_news">
+      <% @news.each do |news| %>
+          <div class="my_news_item">
+            <h3><%= link_to news.title,news_item_path(news.id)%></h3>
+            <em><%= news.updated_at.strftime("%d.%m.%Y") %></em>
+            <p><%= news.preview %></p>
+          </div>
+      <% end %>
+      <div class="apple_pagination">
+        <%= will_paginate @news, :container => false %>
+      </div>
+    </div>
+  </div>
+  <div class="span-one-third">
+
+
+    <div class="my_some_adv">
+      <label>немножечко рекламы</label>
+      <img src="/img/banner.jpg">
+    </div>
+
+    <div id="my_sidebar-news">
+      <h5>Новое в мире автоматизации бизнеса</h5>
+      <ul>
+        sidebar news
+            <li>
+             link to news
+              <em>news date</em>
+            </li>
+      </ul>
+
+    </div>
+  </div>
+
+</div>

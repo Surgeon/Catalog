@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121019105653) do
+ActiveRecord::Schema.define(:version => 20121122124903) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -30,10 +30,10 @@ ActiveRecord::Schema.define(:version => 20121019105653) do
     t.text     "description"
     t.string   "email"
     t.string   "gis_id"
-    t.string   "rand_company"
+    t.string   "rand_phrase"
     t.string   "rand_city"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
     t.boolean  "randomized"
   end
 
@@ -43,6 +43,13 @@ ActiveRecord::Schema.define(:version => 20121019105653) do
     t.text     "body"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "phrases", :force => true do |t|
+    t.string   "text"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.integer  "case"
   end
 
   create_table "rails_admin_histories", :force => true do |t|
@@ -63,7 +70,7 @@ ActiveRecord::Schema.define(:version => 20121019105653) do
     t.text     "description"
     t.string   "friendly_url"
     t.string   "gis_id"
-    t.string   "rand_company"
+    t.string   "rand_phrase"
     t.string   "rand_city"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false

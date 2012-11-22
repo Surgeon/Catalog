@@ -8,10 +8,11 @@ Catalog::Application.routes.draw do
 
   resources :regions, :only => [:index, :show], :key => :friendly_url  do
     get 'category/:category_name' => 'regions#show', :as => :category
+    get 'category/:category_name/:page' => 'regions#show', :as => :category_with_page
   end
 
   resources :company, :only => [:show]
-  resources :news_item, :only => [:index, :show]
+  resources :news_item, :only => [:index, :show], :path => "news"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
