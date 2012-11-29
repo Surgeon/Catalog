@@ -25,5 +25,5 @@
                             материалы доступными на Google TV в стольких странах, во скольких это возможно. Быть может, и России осталось недолго ждать."
                   )
 =end
-  Phrase.create(:text => "Smth in" + [1..7].sample.to_s, :case => [1..2].sample)
+  Phrase.create(:text => "Smth in ", :case => [1..2].sample)
 end

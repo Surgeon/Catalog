@@ -16,4 +16,8 @@ module ApplicationHelper
     end
   end
 
+  def get_x_links(phrase)
+    link_to phrase[:text], region_path(phrase[:city_id]), {:class => 'large'}
+  end
+
 end

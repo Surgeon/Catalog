@@ -1,0 +1,12 @@
+<div class="span4">
+  <div class="popular">
+    <h5>Другие компании</h5>
+    <div>
+      <% @phrases.each do |phrase| %>
+          <p>
+            <strong><%= get_x_links(phrase) %></strong><br/>
+          </p>
+      <% end %>
+    </div>
+  </div>
+</div>

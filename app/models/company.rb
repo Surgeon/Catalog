@@ -73,4 +73,14 @@ class Company < ActiveRecord::Base
     Company.find_or_create_by_gis_id(:name => name, :region_id => region_id, :address => address, :website => website, :email => email, :gis_id => gis_id)
   end
 
+  def get_company_cross_links
+    c_words = Phrase.select('`text`, `case`').find(self.rand_phrase.split(','))
+    c_cities = Region.select('`friendly_url`, `name`').find(self.rand_city.split(','))
+    phrases = []
+    c_words.each_with_index do |w , i|
+      phrases << { :text => w.text + ' ' + YandexInflect.inflections(c_cities[i].name)[w.case.to_i]['__content__'], :city_id => c_cities[i].friendly_url }
+    end
+    phrases
+  end
+
 end
