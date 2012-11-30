@@ -7,7 +7,7 @@
 <div id="catalog" class="row">
     <div class="span16">
         <h4>Категории</h4>
-        <div id="first-glance" class="well" style="padding-bottom:14px;">
+        <div id="first-glance" class="well">
             <% @rubrics.each do |rubric| %>
                 <%=  get_rubric_link(@region, rubric, @rubric, 'btn small', 'btn small primary') %>
             <% end %>
@@ -43,8 +43,6 @@
                 <a href="/company/add_company" class="btn info">Добавить компанию</a>
             </div>
         </div>
-    <% end %>
+<% end %>
+  <%= render :partial => 'partials/xlinks' %>
 </div>
-
-
-

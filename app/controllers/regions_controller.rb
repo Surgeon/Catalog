@@ -14,6 +14,7 @@ class RegionsController < ApplicationController
     result = @region.get_companies_from_2gis(@rubric,@page)
     @companies = result[:companies]
     @total = result[:total]
+    @phrases = @region.get_region_cross_links
   end
 
 end

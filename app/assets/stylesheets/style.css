@@ -60,7 +60,9 @@ li{
 #first-glance ul li:nth-child(3n){
 	clear: right;
 }
-#first-glance.well{	}
+#first-glance.well{
+    padding-bottom:14px;
+}
 
 .green{
 	background:#E8FFE8;
