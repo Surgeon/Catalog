@@ -10,7 +10,8 @@ gem 'therubyracer'
 gem 'rails_admin'
 gem 'devise'
 gem "yandex_inflect", "~> 0.1.2"
-gem 'will_paginate'
+gem 'will_paginate'#, "3.0.pre2"
+gem 'paperclip'
 
 # Gems used only for assets and not required
 # in production environments by default.

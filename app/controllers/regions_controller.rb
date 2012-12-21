@@ -15,6 +15,15 @@ class RegionsController < ApplicationController
     @companies = result[:companies]
     @total = result[:total]
     @phrases = @region.get_region_cross_links
+    @is_pagination = true
+  end
+
+  def search
+    result = Region.search_companies_with_2gis(params[:keyword], params[:city])
+    @companies = result[:companies]
+    @total = 50
+    @page = 1
+    render :show
   end
 
 end

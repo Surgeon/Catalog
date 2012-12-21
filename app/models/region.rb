@@ -97,4 +97,18 @@ class Region < ActiveRecord::Base
     phrases
   end
 
+  def self.search_companies_with_2gis(keyword, city)
+    #get companies from 2gis with search query
+    require 'net/http'
+    require 'rexml/document'
+    query = 'http://catalog.api.2gis.ru/search?what=' + keyword + '&where=' + city + '&page=1&pagesize=50&sort=relevance&version=1.3&key=rulbff8841&output=xml'
+    result = Net::HTTP.get(URI.parse(URI.encode(query)))
+    doc = REXML::Document.new(result)
+    companies = []
+    doc.elements.each('root/result/filial') do |company|
+      companies << {:name => company.elements['name'].text, :id => company.elements['id'].text}
+    end
+    {:companies => companies}
+  end
+
 end

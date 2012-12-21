@@ -19,7 +19,11 @@
         <!--<li><a href="<%= root_url + 'company/add_company/' %>">Добавить компанию</a></li>-->
       </ul>
       <div id="serach" class="span">
-
+        <%= form_tag(search_path, :method => 'get', :class => 'form-stacked') do%>
+            <%= text_field_tag 'keyword', nil, :placeholder => 'что', :id => 'key-word' %>
+            <%= text_field_tag 'city', nil, :placeholder => 'где', :id => 'city-search' %>
+            <%= button_tag 'Поиск', :class => "btn btn-primary" %>
+        <% end %>
       </div>
     </div>
   </div>

@@ -2,9 +2,12 @@
   <li><%= link_to 'Главная', root_url %><span class="divider">/</span></li>
 </ul>
 <div class="page-header">
+  <% if @rubric %>
     <h1><%= @rubric[:name] %> в <%= YandexInflect.inflections(@region.name)[5]['__content__'] %></h1>
+  <% end %>
 </div>
 <div id="catalog" class="row">
+    <% if @rubrics %>
     <div class="span16">
         <h4>Категории</h4>
         <div id="first-glance" class="well">
@@ -13,6 +16,7 @@
             <% end %>
         </div>
     </div>
+    <% end %>
     <% if @companies.length > 0 %>
         <div class="companies span12">
             <ul>
@@ -29,12 +33,13 @@
                     </li>
                 <% end %>
             </ul>
-
+            <% if @is_pagination %>
             <div class="pagination pagination-mini">
                 <ul>
                     <%= get_pagination(@total,30,@page,@region,@rubric).html_safe %>
                 </ul>
             </div>
+            <% end %>
         </div>
     <% else %>
         <div class="alert-message block-message warning">

@@ -56,36 +56,28 @@
           <h4><%= @company[:name] %> на карте</h4>
           <div class="onmap_l">
 
-            <script src="http://api-maps.yandex.ru/1.1/index.xml?key=AOBw_U4BAAAApWC1RQIAfkvRBiIiO0bX5Jmu_ail1Ib4yKcAAAAAAAAAAAD6dDWIpZynn0bmd-fgHghotQkksA=="
-                    type="text/javascript"></script>
+            <script type="text/javascript" src="http://maps.api.2gis.ru/1.0"></script>
             <script type="text/javascript">
-                var latitude=parseFloat('<%= @company[:longitude] %>');
-                var longitude=parseFloat('<%= @company[:latitude] %>');
-                var maptitle="<%= @company[:name] %>";
-                var geocoding='<%= @company[:address] %>';
-
-                YMaps.jQuery(function () {
-                    var map = new YMaps.Map(YMaps.jQuery("#YMapsID"));
-                    map.addControl(new YMaps.Zoom());
-                    if ((latitude>0)&&(longitude>0))
-                    {
-                        geopoint=new YMaps.GeoPoint(latitude,longitude);
-                        map.setCenter(geopoint, 14);
-                        map.openBalloon(geopoint, maptitle, {maxWidth:210, mapAutoPan:true});
-                    }
-                    else
-                    {
-                        var geocoder = new YMaps.Geocoder(geocoding);
-                        // По завершению геокодирования инициализируем карту первым результатом
-                        YMaps.Events.observe(geocoder, geocoder.Events.Load, function (geocoder) {
-                            if (geocoder.length()) {
-                                map.setBounds(geocoder.get(0).getBounds());
-                                map.openBalloon(geocoder.get(0).getGeoPoint(), maptitle, {maxWidth:210, mapAutoPan:true});
-                                map.setZoom(14);
+                DG.autoload(function() {
+                    var myMap = new DG.Map('YMapsID');
+                    myMap.setCenter(new DG.GeoPoint(<%= @company[:longitude] %>,<%= @company[:latitude] %>), 15);
+                    myMap.controls.add(new DG.Controls.Zoom());
+                    var myBalloon = new DG.Balloons.Common({
+                        geoPoint: new DG.GeoPoint(<%= @company[:longitude] %>,<%= @company[:latitude] %>),
+                        contentHtml: '<%= @company[:name] %>'
+                    });
+                    var myMarker = new DG.Markers.Common({
+                        geoPoint: new DG.GeoPoint(<%= @company[:longitude] %>,<%= @company[:latitude] %>),
+                        clickCallback: function() {
+                            if (! myMap.balloons.getDefaultGroup().contains(myBalloon)) {
+                                myMap.balloons.add(myBalloon);
+                            } else {
+                                myBalloon.show();
                             }
-                        });
-                    }
-                })
+                        }
+                    });
+                    myMap.markers.add(myMarker);
+                });
             </script>
 
             <div id="YMapsID" style="width:480px;height:300px"></div>

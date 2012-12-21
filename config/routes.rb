@@ -10,6 +10,7 @@ Catalog::Application.routes.draw do
     get 'category/:category_name' => 'regions#show', :as => :category
     get 'category/:category_name/:page' => 'regions#show', :as => :category_with_page
   end
+  match 'search' => 'regions#search', :as => :search
 
   resources :company, :only => [:show]
   resources :news_item, :only => [:index, :show], :path => "news"

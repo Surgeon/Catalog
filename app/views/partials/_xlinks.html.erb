@@ -1,5 +1,6 @@
 <div class="span4">
   <div class="popular">
+    <% if @phrases %>
     <h5>Другие компании</h5>
     <div>
       <% @phrases.each do |phrase| %>
@@ -8,5 +9,6 @@
           </p>
       <% end %>
     </div>
+    <% end %>
   </div>
 </div>
